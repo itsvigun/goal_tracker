@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
@@ -29,21 +30,41 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get("/first")
+     * @Rest\Get("/users")
      * @param Request $request
      * @return View
      */
-    public function test(Request $request): View
+    public function getUserData(Request $request): View
     {
+        $data = ['test'];
 
-        $name = $this->userService->getNullName();
-        if (!$name) {
-            throw new EntityNotFoundException('User does not exist!');
-        }
-        $data = [
-            'name' => $this->userService->getName(),
-            'surname' => 'Tsvihun',
-        ];
+        return View::create($data, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Rest\Post("/users")
+     * @param Request $request
+     * @return View
+     */
+    public function addUser(Request $request): View
+    {
+        $name = $request->request->get('name');
+        $surname = $request->request->get('surname');
+        $email = $request->request->get('email');
+
+
+        $a = 1;
+        exit;
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new Users();
+        $user->setName('Ihor')
+            ->setSurname('Tsvihun')
+            ->setEmail('sairustsv@gmail.com');
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $data = [$user];
 
         return View::create($data, Response::HTTP_CREATED);
     }

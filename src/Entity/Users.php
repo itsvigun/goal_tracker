@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
-class User
+class Users
 {
     /**
      * @ORM\Id()
@@ -19,6 +19,11 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $name;
 
     /**
@@ -26,14 +31,21 @@ class User
      */
     private $surname;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -56,18 +68,6 @@ class User
     public function setSurname(string $surname): self
     {
         $this->surname = $surname;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
