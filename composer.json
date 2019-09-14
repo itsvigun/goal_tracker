@@ -9,6 +9,7 @@
         "doctrine/migrations": "2.0",
         "doctrine/orm": "^2.5.11",
         "friendsofsymfony/rest-bundle": "^2.6@dev",
+        "jms/serializer-bundle": "^3.4@dev",
         "nelmio/api-doc-bundle": "^3.2@dev",
         "sensio/framework-extra-bundle": "^5.4@dev",
         "symfony/asset": "4.4.*",
